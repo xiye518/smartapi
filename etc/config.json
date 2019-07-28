@@ -1,0 +1,31 @@
+{
+  "log_config": {
+    "count": 2,
+    "level": "debug",
+    "uint": "MB",
+    "roll_type": "RollingFile",
+    "file": "smartapi.log",
+    "dir": "/api/log",
+    "size": 2,
+    "compress": 1
+  },
+  "redis": {
+    "max_idle": 3,
+    "idle_timeout": 240,
+    "password": "",
+    "timeout": 3,
+    "address": "127.0.0.1:6379"
+  },
+  "db_config": {
+    "host": "47.106.254.165",
+    "port": 3306,
+    "user": "root",
+    "password": "tan",
+    "database": "smartapi"
+  },
+  "service_port": 9527,
+  "pprof_addr": 19527,
+  "aes_key": "0123456789abcdef",
+  "mode": "release",
+  "pid_file": "/tmp/xsso.pid"
+}
