@@ -12,17 +12,14 @@ func RunGinService() *gin.Engine {
 		c.Header("Access-Control-Allow-Headers", "Content-Type,Authorization,Cookie")
 	})
 
-	router.Use(CheckAuth())
+	v1 := router.Group("/v1/api")
+	v1.Use(CheckAuth())
 
-	router.GET("/user", GetUser)
-
-	router.POST("/user", AddUser)
-
-	router.PUT("/user/:id", UpdateUser)
-
-	router.DELETE("/user/:id", DeleteUser)
-
-	router.GET("/user/list", GetUserList)
+	v1.GET("/user", GetUser)
+	v1.POST("/user", AddUser)
+	v1.PUT("/user/:id", UpdateUser)
+	v1.DELETE("/user/:id", DeleteUser)
+	v1.GET("/user/list", GetUserList)
 
 	return router
 }
