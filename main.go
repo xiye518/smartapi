@@ -126,8 +126,8 @@ func reload() {
 	}
 	runtime.GOMAXPROCS(runtime.NumCPU() - 1)
 	go log.HandleSignalChangeLogLevel()
-	go http.ListenAndServe(cfg.PprofAddr, nil) //
-	TimeTask()
+	go http.ListenAndServe(fmt.Sprintf("0.0.0.0:%d", cfg.PprofAddr), nil) //
+	go TimeTask()
 	// 初始化db
 	err = models.InitDB(cfg.MysqlConfig)
 	if err != nil {
