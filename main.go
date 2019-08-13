@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/json"
 	"flag"
 	"fmt"
 	"io/ioutil"
@@ -54,7 +53,7 @@ func parseArgs() {
 }
 
 //定时任务
-func TimeTask() {
+func TimerTask() {
 	t := time.NewTicker(15 * time.Second)
 	for {
 		select {
@@ -114,8 +113,7 @@ func reload() {
 	if err != nil {
 		panic(fmt.Sprintf("read config file from: %s with err: %s", configFile, err.Error()))
 	}
-	cfg := common.Config{}
-	err = json.Unmarshal(bs, &cfg)
+	cfg, err := common.LoadConfig(bs)
 	if err != nil {
 		panic(err)
 		return
@@ -127,7 +125,7 @@ func reload() {
 	runtime.GOMAXPROCS(runtime.NumCPU() - 1)
 	go log.HandleSignalChangeLogLevel()
 	go http.ListenAndServe(cfg.PprofAddr, nil) //
-	TimeTask()
+	TimerTask()
 	// 初始化db
 	err = models.InitDB(cfg.MysqlConfig)
 	if err != nil {

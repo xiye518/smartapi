@@ -8,19 +8,24 @@ import (
 
 func CheckAuth() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		//检查访问的api是否放行
+		// 检查访问的api是否放行
+
+		// 生成请求唯一标识id
 		uuid := tools.GetGuid()
 		c.Set("uuid", uuid)
 		log.Infof("url:%s ,uuid: %s", c.Request.URL.String(), uuid)
+
 		// 检查api授权。
 		if !isPass() {
 			log.Errorf("check auth not pass,uuid: %s", uuid)
 			c.Abort()
+			return
 		}
 
 		// 授权通过
 		c.Set("account", "")
 		c.Next()
+
 	}
 }
 
