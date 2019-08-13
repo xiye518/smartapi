@@ -100,8 +100,8 @@ func checkCpuPercent() error {
 			log.Error(err)
 			return err
 		}
-		//cpu五秒采样
-		time.Sleep(5 * time.Second)
+		// cpu十五秒采样
+		time.Sleep(15 * time.Second)
 		pprof.StopCPUProfile()
 	}
 
@@ -124,8 +124,9 @@ func reload() {
 	}
 	runtime.GOMAXPROCS(runtime.NumCPU() - 1)
 	go log.HandleSignalChangeLogLevel()
-	go http.ListenAndServe(cfg.PprofAddr, nil) //
-	TimerTask()
+
+	go http.ListenAndServe(fmt.Sprintf("0.0.0.0:%d", cfg.PprofAddr), nil) //
+	go TimerTask()
 	// 初始化db
 	err = models.InitDB(cfg.MysqlConfig)
 	if err != nil {

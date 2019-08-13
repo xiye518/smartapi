@@ -2,11 +2,12 @@ package models
 
 import (
 	"fmt"
+	"smartapi/internal/common"
+	"smartapi/internal/log"
+
 	_ "github.com/go-sql-driver/mysql" //加载mysql
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
-	"smartapi/internal/common"
-	"smartapi/internal/log"
 )
 
 var DB *gorm.DB

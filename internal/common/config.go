@@ -5,7 +5,7 @@ import "encoding/json"
 type Config struct {
 	LogConfig   *LogConfig   `json:"log_config"`
 	MysqlConfig *MysqlConfig `json:"db_config"`
-	PprofAddr   string       `json:"pprof_addr"`
+	PprofAddr   int          `json:"pprof_addr"`
 	ServicePort int          `json:"service_port"`
 	AESKey      string       `json:"aes_key"`
 	Mode        string       `json:"mode"`
